@@ -1,0 +1,286 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin: 0;
+    background-image: url('../Image/dolist2.jpg');
+    background-size: contain;
+   
+    background-repeat: round;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding: 10px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 350px;
+}
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+     margin: 10px;
+     border-radius: 12px;
+ }
+    
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+    
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #455A64;
+    height: 100%;
+}
+    
+/* Set black background color, white text and some padding */
+
+    
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;} 
+}
+.todo-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: auto
+}
+
+    .todo-list > li {
+        border-radius: 10px;
+        padding: 10px;
+        background: rgba(0, 0, 0, .0001);
+        margin-bottom: 2px;
+        border-left: 3px solid #286090;
+        border: 3px solid #286090;
+
+        color: #d9edf7;
+    }
+
+
+        .todo-list > li:last-of-type {
+            margin-bottom: 0
+        }
+
+        .todo-list > li > input[type='checkbox'] {
+            margin: 0 10px 0 5px
+        }
+
+        .todo-list > li .text {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: 600
+        }
+
+        .todo-list > li .label {
+            margin-left: 10px;
+            font-size: 9px
+        }
+
+        .todo-list > li .tools {
+            display: none;
+            float: right;
+            color: #dd4b39
+        }
+
+            .todo-list > li .tools > .fa,
+            .todo-list > li .tools > .glyphicon,
+            .todo-list > li .tools > .ion {
+                margin-right: 5px;
+                cursor: pointer
+            }
+
+        .todo-list > li:hover .tools {
+            display: inline-block
+        }
+
+        .todo-list > li.complete {
+            color: #999
+        }
+
+            .todo-list > li.complete .text {
+                text-decoration: line-through;
+                font-weight: 500
+            }
+
+            .todo-list > li.complete .label {
+                background: #d2d6de !important
+            }
+
+    .todo-list .danger {
+        border-left-color: #dd4b39
+    }
+
+    .todo-list .warning {
+        border-left-color: #f39c12
+    }
+
+    .todo-list .info {
+        border-left-color: #00c0ef
+    }
+
+    .todo-list .success {
+        border-left-color: #00a65a
+    }
+
+    .todo-list .primary {
+        border-left-color: #3c8dbc
+    }
+
+    .todo-list .handle {
+        display: inline-block;
+        cursor: move;
+        margin: 0 5px
+    }
+.emptyString {
+    border:1px solid red;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+ 
+}
+
+.fa-social {
+     padding: 20px;
+     font-size: 30px;
+     width: auto;
+     text-align: center;
+     text-decoration: none;
+     margin: 5px 2px;
+    
+     border-radius: 50%;
+ }
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
+
+.fa-snapchat-ghost {
+    background: #fffc00;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+    background: #00aff0;
+    color: white;
+}
+
+.fa-android {
+    background: #a4c639;
+    color: white;
+}
+
+.fa-dribbble {
+    background: #ea4c89;
+    color: white;
+}
+
+.fa-vimeo {
+    background: #45bbff;
+    color: white;
+}
+
+.fa-tumblr {
+    background: #2c4762;
+    color: white;
+}
+
+.fa-vine {
+    background: #00b489;
+    color: white;
+}
+
+.fa-foursquare {
+    background: #45bbff;
+    color: white;
+}
+
+.fa-stumbleupon {
+    background: #eb4924;
+    color: white;
+}
+
+.fa-flickr {
+    background: #f40083;
+    color: white;
+}
+
+.fa-yahoo {
+    background: #430297;
+    color: white;
+}
+
+.fa-soundcloud {
+    background: #ff5500;
+    color: white;
+}
+
+.fa-reddit {
+    background: #ff5700;
+    color: white;
+}
+
+.fa-rss {
+    background: #ff6600;
+    color: white;
+}
+.btn-success {
+    font-weight: bolder;
+    background-color: rgba(0, 0, 0, .0001);
+}

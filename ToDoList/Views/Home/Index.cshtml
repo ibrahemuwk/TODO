@@ -1,0 +1,249 @@
+﻿@model ToDoList.Models.IndexView
+@*@{
+        ViewBag.Title = "Home Page";
+    }
+    @using Microsoft.AspNet.Identity
+    @using ToDoList.Models
+    @if (Request.IsAuthenticated)
+    {
+
+
+        <h1>Welcome @ViewBag.fname @ViewBag.lname</h1>
+        <h2>Your age is @ViewBag.age</h2>
+        <h2>Your age is @ViewBag.email</h2>
+
+
+    }
+    else
+    {
+        <h1>Not loged yet</h1>
+    }*@
+<div class="container-fluid" style="height: 100%">
+    <br /><br />
+    <div class="col-lg-12" id="del" style="margin-left: 40px;">
+        <a class="btn btn-success" onclick="clear()" data-toggle="modal" data-target="#myModal
+           " style="">
+            <span class="text">
+                <i class="fa fa-plus"></i>
+                Add New Item
+            </span>
+        </a>
+        <br />
+    </div>
+    <br />
+    <br />
+    <div class="col-lg-12 " id="scroll-content" style="height: 100%">
+
+
+
+        @* TO DO START *@
+
+
+        <!-- TO DO List -->
+        <ul class="todo-list list-group" id="list">
+            @foreach (var item in Model.DoLists)
+            {
+                if (item.IsCompleted)
+                {
+                    <li id="_li+@item.Id" class="well list-group-item text-justify complete" style="height:auto;font-size: 1.9em">
+                        <!-- drag handle -->
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <!-- checkbox -->
+                        @if (item.IsCompleted)
+                        {
+                            <input type="checkbox" class="" checked="checked" value="listID" id="@item.Id">
+                   
+                        }
+                        else
+                        { 
+                            <input type="checkbox" class="" value="listID" id="@item.Id">
+                        }
+
+
+                        <!-- todo text -->
+                        <span class="text">@item.Description</span>
+                        <!-- Emphasis label -->
+                        @if (item.Status == "VeryImportant")
+                        {
+                            <small style="font-size: .7em" class="label label-danger"><i class="fa fa-clock-o"></i> @item.Time.Minute Minute Ago</small>
+
+                        }
+                        else if (item.Status == "Important")
+                        {
+                            <small style="font-size: .7em" class="label label-info"><i class="fa fa-clock-o"></i> @item.Time.Minute Minute Ago</small>
+
+                        }
+                        else
+                        {
+                            <small style="font-size: .7em" class="label label-warning"><i class="fa fa-clock-o"></i> @item.Time.Minute Minute Ago</small>
+
+                        }
+                        <!-- General tools such as edit or delete-->
+                        <div class="tools">
+                            <i onclick="remove(this,@item.Id)"  class="fa fa-trash-o"></i>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li id="_li+@item.Id" class="well list-group-item text-justify " style="height:auto;font-size: 1.9em">
+                        <!-- drag handle -->
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <!-- checkbox -->
+                        @if (item.IsCompleted)
+                        {
+                            <input type="checkbox" class="" checked="checked" value="listID" id="@item.Id">
+                   
+                        }
+                        else
+                        { 
+                            <input type="checkbox" class="" value="listID" id="@item.Id">
+                        }
+
+
+                        <!-- todo text -->
+                        <span class="text ">@item.Description</span>
+                        <!-- Emphasis label -->
+                        @if (item.Status == "VeryImportant")
+                        {
+                            DateTime now = DateTime.Now;
+                            var time = (now - item.Time).TotalHours;
+                        <small style="font-size: .7em" class="label label-danger right"><i class="fa fa-clock-o"></i> @(Math.Floor(time)) Hours  Ago</small>
+
+                        }
+                        else if (item.Status == "Important")
+                        {
+                            DateTime now = DateTime.Now;
+                            var time = (now - item.Time).TotalHours;
+                        <small style="font-size: .7em" class="label label-info right"><i class="fa fa-clock-o"></i> @(Math.Floor(time)) Hours  Ago</small>
+
+                        }
+                        else
+                        {
+                            DateTime now = DateTime.Now;
+                            var time= (now - item.Time).TotalHours;
+                            <small style="font-size: .7em" class="label label-warning right"><i class="fa fa-clock-o"></i> @(Math.Floor(time)) Hours Ago</small>
+
+                           
+
+                        }
+                        <!-- General tools such as edit or delete-->
+                        <div class="tools" style="float: right">
+                            <i onclick="remove(this,@item.Id)"  class="fa fa-trash-o"></i>
+                        </div>
+                    </li>
+                }
+            
+            }
+            
+           
+
+        </ul>
+
+
+
+        <!-- /.box-body -->
+
+
+
+    </div>
+
+</div>
+<div class="modal fade fa-align-center " id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="font-weight: bolder">
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title">Add Item</div>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "myForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DoList.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DoList.Description, new { htmlAttributes = new { @class = "form-control col-md-12", id = "des"  } })
+                                @Html.ValidationMessageFor(model => model.DoList.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DoList.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.DoList.Status,new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Normal", Value = "Normal",Selected = true},
+                                    new SelectListItem { Text = "Important", Value = "Important"},
+                                    new SelectListItem { Text = "Very Important", Value = "VeryImportant"}
+                                },
+                                    new {@class = "form-control"})
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input  value="Create"  class="btn btn-success" />
+
+                            </div>
+                        </div>*@
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" onclick="create()" style="color: black" class="btn btn-success" >Create</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+   
+
+    function create(parameters) {
+            var text = $("#des").val();
+        if (!text || !text.replace(/\s/g, '').length || text.length < 5 || text.length > 199 ) {
+        $("#des").addClass("emptyString");
+        } else {
+            $("#des").removeClass("emptyString");
+            
+            $("#myForm").submit();
+           
+        }
+
+        
+        //
+
+    }
+    function clear(parameters) {
+        
+        $("#des").val('');
+    }
+   
+    function remove(obj,id) {
+        $.ajax({
+            url: '/Home/delete_list',
+            type: "POST",
+            data: {
+                id: id
+            }
+        }).done(function () {
+            $(obj).parent().parent().fadeOut(1000);
+        });
+        
+    }
+   
+
+</script>
